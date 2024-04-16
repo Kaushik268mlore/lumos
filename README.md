@@ -30,7 +30,7 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 # Lumos
 ## todo 
-- [ ] deploy (vercel)
+- [x] deploy (vercel)
 - [ ] scaffold basic ui 
 - [ ] set up a database (vercel postgres)
 - [ ] add UI
