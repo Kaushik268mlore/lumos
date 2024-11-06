@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <main className="">
         <div className="flex flex-wrap gap-4">
-          {randImages.map((image)=>(
+          {[...randImages,...randImages,...randImages].map((image)=>(
             <Link key={image.id} href={`/image/${image.id}`} className="w-48">
               <img src={image.url} alt="image" className="w-full h-full object-cover" />
           
