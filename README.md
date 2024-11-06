@@ -32,6 +32,7 @@ Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 ## todo 
 - [x] deploy (vercel)
 - [X] scaffold basic ui 
+- [x] build performance improvement
 - [ ] set up a database (vercel postgres)
 - [ ] add UI
 - [ ] add auth  (w/ clerk)
