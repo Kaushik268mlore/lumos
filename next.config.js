@@ -40,7 +40,7 @@ const config = withSentryConfig(
 
     // Suppresses source map uploading logs during build
     silent: true,
-    org: "Kaushik268mlore",
+    org: "kaushik268mlore",
     project: "lumos",
   },
   {
