@@ -1,35 +1,44 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
-import {db} from "~/server/db";
-// const randURLs=[
-//   "https://utfs.io/f/0e8873a9-cbbe-4836-a72b-d072408b95e6-kbo461.jpg",
-//   "https://utfs.io/f/ec692bb8-2722-4812-bd76-22c7f11f656e-n3ej4z.jpg",
-//   "https://utfs.io/f/ded6030a-21e0-4160-a6fa-69245a25609c-kcvpf0.png",
-//   "https://utfs.io/f/50d03f88-53de-45dd-ad00-1ce6505fa221-xnzt.jpg.jfif",
-// ];
-// const randImages= randURLs.map((url,index)=>({
-//   id:index+1,
-//   url,
-// }));
+import { getMyImages } from "~/server/queries";
+
 export const dynamic = "force-dynamic";
+
+async function Images() {
+  const images = await getMyImages();
+
+  return (
+    <div className="flex flex-wrap justify-center gap-4 p-4">
+      {images.map((image) => (
+        <div key={image.id} className="flex h-48 w-48 flex-col">
+          <Link href={`/img/${image.id}`}>
+            <Image
+              src={image.url}
+              style={{ objectFit: "contain" }}
+              width={192}
+              height={192}
+              alt={image.name}
+            />
+          </Link>
+          <div>{image.name}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default async function HomePage() {
-  const images= await db.query.images.findMany({
-    orderBy:(model,{desc})=>( desc(model.updatedAt)),
-  }); 
-  console.log(images);
-  // this won't show up because this happens on the server side
-  
   return (
     <main className="">
-        <div className="flex flex-wrap gap-4">
-          {[...images,...images,...images].map((image,index)=>(
-            <Link key={image.id+"-"+index} href={`/image/${image.id}`} className="w-48 flex flex-col">
-              <img src={image.url} alt="image" className="w-full h-full object-cover" />
-              <div className="">{image.name}</div>
-          
-          </Link>))
-        }
+      <SignedOut>
+        <div className="h-full w-full text-center text-2xl">
+          Please sign in above
         </div>
-
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
     </main>
   );
-} 
+}

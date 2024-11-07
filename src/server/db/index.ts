@@ -1,14 +1,7 @@
 import { drizzle } from "drizzle-orm/vercel-postgres";
-// import postgres from "postgres";
+import { sql } from "@vercel/postgres";
 
-import {sql} from "@vercel/postgres";
-
-// import { env } from "~/env";
 import * as schema from "./schema";
 
-/**
- * Cache the database connection in development. This avoids creating a new connection on every HMR
- * update.
- */
-
+// Use this object to send drizzle queries to your DB
 export const db = drizzle(sql, { schema });
